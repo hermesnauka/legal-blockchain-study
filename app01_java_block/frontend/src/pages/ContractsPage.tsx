@@ -35,7 +35,7 @@ function MedicalPanel({ showToast }: { showToast: (msg: string) => void }) {
   const { t, lang } = useI18n()
   const [patientId, setPatientId] = useState('patient-001')
   const [granteeId, setGranteeId] = useState('dr-kowalski')
-  const [scope, setScope] = useState('FULL_HISTORY')
+  const [scope, setScope] = useState('HISTORY_READ')
   const [records, setRecords] = useState<ConsentRecord[] | null>(null)
 
   const submit = async (granted: boolean) => {

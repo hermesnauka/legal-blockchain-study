@@ -53,9 +53,16 @@ public class Blockchain {
     }
 
     /**
-     * Accepts a transaction into the pending pool after verifying its ML-DSA signature
-     * and that the claimed sender address really is the fingerprint of the signing key
-     * (otherwise anyone could sign as somebody else with their own key).
+     * Accepts a transaction into the pending pool after verifying its ML-DSA signature,
+     * that the claimed sender address really is the fingerprint of the signing key
+     * (otherwise anyone could sign as somebody else with their own key), and that the
+     * sender can actually cover the amount: confirmed balance minus what they already
+     * have pending. Rewards are exempt — they are the only sanctioned money creation,
+     * bounded by {@link TokenomicsService}. Counting pending outgoing amounts closes the
+     * mempool double-spend: two transfers that are individually covered but jointly
+     * overdraw are caught at the second {@code submit}, so no sealed block can ever
+     * drive a balance negative — the first invariant an auditor checks in any book of
+     * record.
      */
     public Transaction submit(Transaction tx) {
         if (!tx.isReward()) {
@@ -76,10 +83,32 @@ public class Blockchain {
             }
         }
         synchronized (chain) {
+            if (!tx.isReward()) {
+                BigDecimal available = balances()
+                        .getOrDefault(tx.sender(), BigDecimal.ZERO)
+                        .subtract(pendingOutgoingOf(tx.sender()));
+                if (tx.amount().compareTo(available) > 0) {
+                    throw new IllegalArgumentException("Insufficient funds: sender " + tx.sender()
+                            + " has " + available.stripTrailingZeros().toPlainString()
+                            + " LGC available but tried to send "
+                            + tx.amount().stripTrailingZeros().toPlainString() + " LGC");
+                }
+            }
             pending.add(tx);
         }
         events.publishEvent(new LedgerEvent(LedgerEvent.Type.TX_ADDED, tx));
         return tx;
+    }
+
+    /** The sender's not-yet-sealed outgoing total; call only while holding the chain monitor. */
+    private BigDecimal pendingOutgoingOf(String sender) {
+        BigDecimal sum = BigDecimal.ZERO;
+        for (Transaction tx : pending) {
+            if (!tx.isReward() && tx.sender().equals(sender)) {
+                sum = sum.add(tx.amount());
+            }
+        }
+        return sum;
     }
 
     /**
