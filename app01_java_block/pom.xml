@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.3</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.devpowers</groupId>
+    <artifactId>legalchain</artifactId>
+    <version>0.1.0</version>
+    <name>legalchain</name>
+    <description>
+        Educational, compliant Blockchain 3.0 general ledger (MVP).
+        Post-quantum cryptography (NIST FIPS 204 ML-DSA / Dilithium signatures,
+        FIPS 203 ML-KEM / Kyber key encapsulation), pluggable consensus
+        (PoW / PoS / BFT via Strategy pattern), smart contracts for medicine
+        and agriculture, and PQC-secured P2P ledger synchronization.
+    </description>
+
+    <properties>
+        <java.version>21</java.version>
+        <bouncycastle.version>1.81</bouncycastle.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!--
+            BouncyCastle: NIST-standardized post-quantum algorithms.
+            ML-DSA (FIPS 204, formerly CRYSTALS-Dilithium) for signatures and
+            ML-KEM (FIPS 203, formerly CRYSTALS-Kyber) for key encapsulation
+            are provided by the main "BC" provider since 1.79+.
+        -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+            <version>${bouncycastle.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

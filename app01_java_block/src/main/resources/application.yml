@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: legalchain
+  threads:
+    virtual:
+      # Project Loom virtual threads: every servlet request and P2P task runs on a
+      # cheap virtual thread, so blocking I/O (WebSocket sync, mining) scales without
+      # tuning platform-thread pools.
+      enabled: true
+
+legalchain:
+  node:
+    # Human-readable node name; the cryptographic node identity is the
+    # ML-DSA public-key fingerprint generated at startup (see NodeWallet).
+    name: node-A
+  consensus:
+    default-strategy: POS
+  tokenomics:
+    # Educational tokenomics: fixed block reward, halved every `halving-interval`
+    # blocks, with a hard supply cap enforced by TokenomicsService.
+    block-reward: 50
+    halving-interval: 100
+    max-supply: 21000
