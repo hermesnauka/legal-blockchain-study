@@ -11,7 +11,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.devpowers</groupId>
+    <groupId>com.gandarych</groupId>
     <artifactId>legalchain</artifactId>
     <version>0.1.0</version>
     <name>legalchain</name>
