@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LegalChain.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f91bb27891f0dd590707ea1addf0d77da8219728")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9ed5a0e0de21a38239239bcecf692b83106342b")]
 [assembly: System.Reflection.AssemblyProductAttribute("LegalChain.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LegalChain.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
