@@ -1,0 +1,12 @@
+{
+  "port": 8090,
+  "nodeName": "node-A",
+  "consensus": {
+    "defaultStrategy": "POS"
+  },
+  "tokenomics": {
+    "blockReward": 50,
+    "halvingInterval": 100,
+    "maxSupply": 21000
+  }
+}

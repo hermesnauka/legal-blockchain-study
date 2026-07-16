@@ -2,7 +2,7 @@
 # ROLA 1: ZGŁOŚ SIĘ JAKO GŁÓWNY ARCHITEKT SYSTEMÓW I WŁAŚCICIEL PRODUKTU (ENTERPRISE SYSTEM ARCHITECT & PO)
 
 ## CEL
-Twoim zadaniem jest przygotowanie kompleksowej architektury systemu, specyfikacji wymagań (Frontend i Backend) oraz epików i User Stories dla legalnej, edukacyjno-funkcjonalnej aplikacji opartej na technologii Blockchain 3.0, NFT i Smart Kontraktach. Aplikacja ma stanowić przyczółek (MVP) dla zaawansowanego, zdecentralizowanego systemu, zbudowanego na Java JDK 21 (Spring Boot).
+Twoim zadaniem jest przygotowanie kompleksowej architektury systemu, specyfikacji wymagań (Frontend i Backend) oraz epików i User Stories dla legalnej, edukacyjno-funkcjonalnej aplikacji opartej na technologii Blockchain 3.0, NFT i Smart Kontraktach. Aplikacja ma stanowić przyczółek (MVP) dla zaawansowanego, zdecentralizowanego systemu, zbudowanego na Django i Python.
 Aplikacja musi być z przełącznikiem, aby wyświetlać ją w języku polskim lub w angielskim za pomocą prostego przełącznika z flagą.
 
 ## ZADANIA DO WYKONANIA W TYM KROKU:
@@ -11,7 +11,7 @@ Aplikacja musi być z przełącznikiem, aby wyświetlać ją w języku polskim l
    - Tworzenie i certyfikację cyfrowego posiadania (NFT) i tożsamości twórcy (SSI - Self-Sovereign Identity).
    - Mechanizmy Crowdfundingu.
    - Synchronizację rejestru dla dwóch zdalnych użytkowników z zachowaniem prywatności (Zero-Knowledge Proofs).
-2. **Wymagania Backend (Java 21, Spring Boot):** Opisz architekturę implementacji kryptografii post-kwantowej (NIST PQC, QKD), zarządzania węzłami, algorytmów konsensusu i silnika Smart Kontraktów dla medycyny/rolnictwa.
+2. **Wymagania Backend (Django i Python):** Opisz architekturę implementacji kryptografii post-kwantowej (NIST PQC, QKD), zarządzania węzłami, algorytmów konsensusu i silnika Smart Kontraktów dla medycyny/rolnictwa.
 3. **Wymagania Frontend:** Zaprojektuj architekturę modułu edukacyjnego połączonego z żywym kodem. Frontend musi wizualizować: bloki, łańcuchy, transakcje, węzły, tokenomię oraz wyjaśniać rodzaje konsensusu (PoW, PoS, Hybrydowe, DPoS, PoReputation, PoUtility, BFT, PoH, PoET).
 4. **Connectors & Skills:** Wylistuj wymagane konektory do integracji (np. WebSockets dla P2P, BouncyCastle PQC provider, IPFS Connector dla metadanych NFT, REST/GraphQL) oraz "Skills" (umiejętności AI/Agentów), które będą potrzebne do implementacji (np. `quantum-crypto-engineering`, `spring-boot-ledger-management`, `react-dapp-visualization`).
 
@@ -22,10 +22,10 @@ Aplikacja musi być z przełącznikiem, aby wyświetlać ją w języku polskim l
 #
 
 
-# ROLA 2: ZGŁOŚ SIĘ JAKO GŁÓWNY INŻYNIER BLOCKCHAIN, KRYPTOGRAFII I BACKENDU (LEAD JAVA BLOCKCHAIN ENGINEER)
+# ROLA 2: ZGŁOŚ SIĘ JAKO GŁÓWNY INŻYNIER BLOCKCHAIN, KRYPTOGRAFII I BACKENDU (LEAD Django i Python BLOCKCHAIN ENGINEER)
 
 ## CEL
-Na podstawie zatwierdzonej architektury, zaimplementuj fundamenty legalnego rejestru rozproszonego (Blockchain 3.0) w Javie (JDK 21) przy użyciu Spring Boot. Kod ma działać jako faktyczny rejestr (General Ledger), a nie tylko atrapa.
+Na podstawie zatwierdzonej architektury, zaimplementuj fundamenty legalnego rejestru rozproszonego (Blockchain 3.0) w Django i Python. Kod ma działać jako faktyczny rejestr (General Ledger), a nie tylko atrapa.
 Aplikacja musi być z przełącznikiem, aby wyświetlać ją w języku polskim lub w angielskim za pomocą prostego przełącznika z flagą.
 
 ## WYMAGANIA IMPLEMENTACYJNE (KOD DO NAPISANIA):

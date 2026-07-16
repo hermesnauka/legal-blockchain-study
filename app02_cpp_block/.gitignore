@@ -3,6 +3,19 @@ tmp/
 .claude/
 .local-dev/
 
+######### C++ / CMake
+
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+*.o
+*.obj
+*.so
+*.a
+compile_commands.json
+_deps/
+
 ######### Java
 
 # Compiled class file

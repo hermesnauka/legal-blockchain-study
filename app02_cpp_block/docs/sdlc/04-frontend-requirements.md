@@ -87,5 +87,5 @@ Mint form (`title`, `description`, `metadataUri` — labeled as IPFS CID stub) a
 | Responsiveness | Usable ≥ 360 px; chain view horizontally scrollable on mobile. |
 | Resilience | Backend-down state shows a friendly banner (in the active language) with retry; WS auto-reconnect with backoff. |
 | Performance | First meaningful render < 2 s dev-mode; WS delta updates instead of polling. |
-| Config | Backend base URL via `VITE_API_URL` (default `http://localhost:8080`). |
+| Config | Backend base URL via `VITE_API_URL` (default `http://localhost:8090`). |
 | Education quality | Every explanatory text exists in **both** EN and PL, written for an intelligent non-specialist; decentralization, SSI and scalability each have a dedicated explainer section. |

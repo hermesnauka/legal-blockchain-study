@@ -2,7 +2,7 @@
 # ROLE 1: ACT AS THE ENTERPRISE SYSTEM ARCHITECT & PRODUCT OWNER (PO)
 
 ## GOAL
-Your task is to prepare a comprehensive system architecture, requirements specifications (Frontend and Backend), as well as Epics and User Stories for a compliant, educational, and functional application based on Blockchain 3.0, NFT, and Smart Contracts. The application is to serve as an MVP (Minimum Viable Product) for an advanced, decentralized system built on Java JDK 21 (Spring Boot).
+Your task is to prepare a comprehensive system architecture, requirements specifications (Frontend and Backend), as well as Epics and User Stories for a compliant, educational, and functional application based on Blockchain 3.0, NFT, and Smart Contracts. The application is to serve as an MVP (Minimum Viable Product) for an advanced, decentralized system built on C## Csharp.
 The application must have a switch to display it in Polish or English, using a simple switcher with a flag.
 
 ## TASKS TO BE COMPLETED IN THIS STEP:
@@ -11,7 +11,7 @@ The application must have a switch to display it in Polish or English, using a s
    - Creation and certification of digital ownership (NFT) and creator identity (SSI - Self-Sovereign Identity).
    - Crowdfunding mechanisms.
    - Ledger synchronization for two remote users with privacy preservation (Zero-Knowledge Proofs).
-2. **Backend Requirements (Java 21, Spring Boot):** Describe the implementation architecture of post-quantum cryptography (NIST PQC, QKD), node management, consensus algorithms, and a Smart Contract engine for medicine/agriculture.
+2. **Backend Requirements (C## Csharp):** Describe the implementation architecture of post-quantum cryptography (NIST PQC, QKD), node management, consensus algorithms, and a Smart Contract engine for medicine/agriculture.
 3. **Frontend Requirements:** Design the architecture of an educational module connected with live code. The frontend must visualize: blocks, chains, transactions, nodes, tokenomics, and explain consensus types (PoW, PoS, Hybrid, DPoS, PoReputation, PoUtility, BFT, PoH, PoET).
 4. **Connectors & Skills:** List the required integration connectors (e.g., WebSockets for P2P, BouncyCastle PQC provider, IPFS Connector for NFT metadata, REST/GraphQL) and "Skills" (AI/Agent capabilities) needed for implementation (e.g., `quantum-crypto-engineering`, `spring-boot-ledger-management`, `react-dapp-visualization`).
 
@@ -23,10 +23,10 @@ The application must have a switch to display it in Polish or English, using a s
 #
 
 
-# ROLE 2: ACT AS THE LEAD JAVA BLOCKCHAIN, CRYPTOGRAPHY & BACKEND ENGINEER
+# ROLE 2: ACT AS THE LEAD C## Csharp BLOCKCHAIN, CRYPTOGRAPHY & BACKEND ENGINEER
 
 ## GOAL
-Based on the approved architecture, implement the foundations of a compliant distributed ledger (Blockchain 3.0) in Java (JDK 21) using Spring Boot. The code must function as an actual general ledger, not just a mock.
+Based on the approved architecture, implement the foundations of a compliant distributed ledger (Blockchain 3.0) in C## Csharp. The code must function as an actual general ledger, not just a mock.
 The application must have a switch to display it in Polish or English, using a simple switcher with a flag.
 
 ## IMPLEMENTATION REQUIREMENTS (CODE TO BE WRITTEN):
