@@ -112,4 +112,4 @@ Personas: **Learner** (course participant), **Node Operator** (runs a ledger nod
 | US-5.4 Use-case dashboards | Should | 5 |
 | US-6.1 PL/EN flag switcher | Must | 3 |
 
-**MVP scope (Must):** 58 points. Definition of Done: acceptance criteria pass, unit tests cover core/crypto/consensus, Javadoc explains the compliance/security rationale, texts available in EN and PL.
+**MVP scope (Must):** 58 points. Definition of Done: acceptance criteria pass, unit tests cover core/crypto/consensus, PEP 257 docstrings explain the compliance/security rationale, texts available in EN and PL.

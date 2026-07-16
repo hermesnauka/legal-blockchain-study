@@ -9,7 +9,7 @@ Each requirement: **ID · requirement · acceptance criterion · epic trace** ([
 
 | ID | Requirement | Acceptance criterion | Epic |
 |---|---|---|---|
-| BE-01 | `Block`/`Transaction` as immutable Java records; SHA3-256 block hash over `index‖timestamp‖previousHash‖merkleRoot‖validatorId‖nonce‖proof`; Merkle root over transactions | Unit test: mutating any transaction changes the Merkle root and invalidates the chain | E1 |
+| BE-01 | `Block`/`Transaction` as immutable frozen dataclasses (`@dataclass(frozen=True)`); SHA3-256 block hash over `index‖timestamp‖previousHash‖merkleRoot‖validatorId‖nonce‖proof`; Merkle root over transactions | Unit test: mutating any transaction changes the Merkle root and invalidates the chain | E1 |
 | BE-02 | Deterministic genesis block identical on every fresh node | Two fresh nodes report the same block-0 hash | E1, E4 |
 | BE-03 | Mempool accepts only ML-DSA-verified transactions with sufficient funds (REWARD exempt) | Invalid signature or overdraft → 4xx, not queued | E1 |
 | BE-04 | `POST /api/chain/mine` seals mempool + REWARD tx via the active consensus strategy | Response Block matches contract v1; `BLOCK_ADDED` pushed on `/ws/events` | E1 |
@@ -22,21 +22,21 @@ Each requirement: **ID · requirement · acceptance criterion · epic trace** ([
 | BE-11 | MedicalConsentContract: grant/revoke consent; **no clinical data on-chain** | `GET /api/contracts/medical/{patientId}` returns consent state derived from chain; payload contains only ids/scope/decision | E1 |
 | BE-12 | AgriSupplyChainContract: append-only batch events (stage/actor/location) | `GET /api/contracts/agri/{batchId}` returns chronological farm-to-fork trail | E1 |
 | BE-13 | NFT mint as signed `NFT_MINT` transaction with `metadataUri` (IPFS stub); gallery endpoint | Minted NFT lists owner address + `mintTxId`; signature verifiable | E2 |
-| BE-14 | Node identity = wallet fingerprint; `GET /api/node` per contract v1 | Two instances (ports 8080/8081) report distinct nodeIds | E4 |
+| BE-14 | Node identity = wallet fingerprint; `GET /api/node` per contract v1 | Two instances (ports 8110/8111) report distinct nodeIds | E4 |
 | BE-15 | REST API conforms exactly to **API Contract v1** (doc 03) | Contract-level integration test per endpoint | all |
-| BE-16 | Virtual threads enabled (`spring.threads.virtual.enabled=true`; P2P client on virtual-thread executor) | Config present; Javadoc explains Loom choice | NFR |
-| BE-17 | Javadoc on all crypto/consensus/P2P classes explains *why compliant & secure* | Review checklist passes | NFR |
+| BE-16 | Concurrency via async Channels consumers on the Daphne ASGI event loop + `websockets` P2P client on a background thread (the Python analogue of Java virtual threads) | No blocking of the event loop; docstrings explain the concurrency choice | NFR |
+| BE-17 | PEP 257 docstrings on all crypto/consensus/P2P modules explain *why compliant & secure* | Review checklist passes | NFR |
 
 ## Security & PQC (SEC)
 
 | ID | Requirement | Acceptance criterion | Epic |
 |---|---|---|---|
-| SEC-01 | BouncyCastle registered at startup; all primitives via JCA (no hand-rolled crypto) | Provider present in test; no custom cipher code | E1 |
+| SEC-01 | All PQC primitives via `dilithium-py` / `kyber-py` (NIST reference implementations) + `cryptography` AESGCM + `hashlib` SHA3-256 (no hand-rolled crypto) | Packages installed and exercised in tests; no custom cipher code | E1 |
 | SEC-02 | ML-DSA-65 (FIPS 204) wallet keys; sign/verify for every transaction | Roundtrip unit test; corrupted sig fails verify | E1, E2 |
 | SEC-03 | Wallet address/fingerprint = SHA3-256 of encoded public key (truncated hex) — pseudonymous SSI-style identity, no personal data | `GET /api/wallet` exposes address/algorithm/fingerprint only | E2, E4 |
 | SEC-04 | P2P handshake: ML-DSA-signed transcript + ML-KEM-768 encapsulation → AES-256-GCM session key | Integration test: two nodes derive identical session key; tampered handshake aborts | E4 |
 | SEC-05 | QKD-inspired freshness: new KEM encapsulation per session; unique GCM nonce per frame; abort on auth-tag failure | Code review + test: key never reused across sessions | E4 |
-| SEC-06 | MITM defense documented in Javadoc: interceptor cannot substitute KEM key without breaking transcript signature | Javadoc present on handshake classes | E4 |
+| SEC-06 | MITM defense documented in docstrings: interceptor cannot substitute KEM key without breaking transcript signature | Docstrings present on handshake modules | E4 |
 | SEC-07 | ZKP-style pseudonymous trust: peers learn only fingerprint + proof of key possession | Handshake payload contains no identity attributes | E4 |
 | SEC-08 | Private keys never serialized or exposed over any API | Grep/test: no key material in REST/WS payloads or logs | NFR |
 
@@ -62,12 +62,12 @@ Each requirement: **ID · requirement · acceptance criterion · epic trace** ([
 | I18N-01 | Header **flag switcher 🇬🇧/🇵🇱** toggling the entire UI (labels + educational texts) without reload | One click re-renders all visible strings in the other language | E6 |
 | I18N-02 | Choice persisted in `localStorage`; default EN; `<html lang>` updated | Reload keeps the selected language | E6 |
 | I18N-03 | EN and PL dictionaries have identical key sets; no user-visible hard-coded strings | Key-set equality test in CI | E6 |
-| I18N-04 | Backend serves both dictionaries via `GET /api/i18n/{lang}` from `messages_en/pl.properties` | Endpoint returns flat maps for `en` and `pl` | E6 |
+| I18N-04 | Backend serves both dictionaries via `GET /api/i18n/{lang}` from `i18n/messages_{en,pl}.json` | Endpoint returns flat maps for `en` and `pl` | E6 |
 
 ## Definition of Done (MVP)
 
 1. All **Must** stories (doc 02) satisfied; every BE/SEC/FE/I18N acceptance criterion demonstrably true.
-2. `mvn test` green (chain integrity, PQC roundtrips, consensus, contracts); frontend builds clean.
-3. Two-node demo script works: start :8080 and :8081 → connect → transact → mine → sync → both chains identical.
-4. Every crypto/consensus/P2P class carries compliance-and-security Javadoc (BE-17).
+2. `python manage.py test` green (chain integrity, PQC roundtrips, consensus, contracts); frontend builds clean.
+3. Two-node demo script works: start :8110 and :8111 → connect → transact → mine → sync → both chains identical.
+4. Every crypto/consensus/P2P module carries compliance-and-security docstrings (BE-17).
 5. Full UI verified in both Polish and English via the flag switcher.

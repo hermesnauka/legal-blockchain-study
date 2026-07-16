@@ -5,6 +5,10 @@
 **Status:** Approved for implementation
 **Mandatory cross-cutting requirement:** the UI ships with a PL/EN language switcher (🇬🇧/🇵🇱 flag toggle) — see [04-frontend-requirements.md](04-frontend-requirements.md).
 
+### Implementation notes (Python/Django)
+
+This `app04_python_django_block` variant implements the same architecture on **Python 3.14 / Django 6 + Channels + Daphne (ASGI)** with frozen dataclasses for the domain, a single `ledger` app holding in-memory state (no DB models), pure-Python NIST PQC packages (`dilithium-py` for ML-DSA-65, `kyber-py` for ML-KEM-768) plus `cryptography` for AES-256-GCM and `hashlib` for SHA3-256, and Channels WebSocket consumers (`runserver` serves WebSockets). Configuration lives in the `LEGALCHAIN` dict of `settings.py` with env-var overrides (e.g., `LEGALCHAIN_NODE_NAME`). Ports: node-A **8110**, node-B **8111**, Vite frontend dev server **5176**. Where diagrams or text below mention Spring Boot / Java 21 / BouncyCastle / virtual threads / `--server.port=8080/8081`, read Django 6 + Channels / Python 3.14 / dilithium-py + kyber-py / async consumers + background threads / `manage.py runserver 8110/8111`.
+
 ---
 
 ## 1. System Context
@@ -64,9 +68,9 @@ C4Container
 
 | Decision | Choice | Rationale |
 |---|---|---|
-| Language/runtime | **Java 21 (records, virtual threads)** | Immutable domain via records = tamper-evidence by construction; Loom virtual threads give cheap per-connection concurrency for P2P and WS fan-out. |
-| Framework | **Spring Boot 3.5** | Production-grade DI, WebSocket support, `spring.threads.virtual.enabled=true`. |
-| PQC | **BouncyCastle (ML-DSA, ML-KEM)** | Reference JCA implementations of NIST FIPS 204 / FIPS 203; portable across JDKs (unlike JDK-24-only built-ins). |
+| Language/runtime | **Python 3.14 (frozen dataclasses, asyncio + threading)** | Immutable domain via frozen dataclasses = tamper-evidence by construction; async Channels consumers plus background-thread WS client give cheap per-connection concurrency for P2P and WS fan-out. |
+| Framework | **Django 6 + Channels + Daphne (ASGI)** | Production-grade web framework; Channels adds first-class WebSocket consumers served directly by `runserver`. |
+| PQC | **dilithium-py + kyber-py (ML-DSA, ML-KEM)** | Pure-Python NIST reference implementations of FIPS 204 / FIPS 203 — slower than BouncyCastle/liboqs, but dependency-light and readable for education. |
 | Frontend | **React 18 + Vite + TypeScript** | See justification in doc 04. |
 | Transport | **WebSockets** (REST for commands) | Full-duplex ledger events; gRPC deferred (doc 05). |
 | Persistence | **In-memory chain (MVP)** | Educational focus; the chain itself is the audit log. File/DB snapshotting is a Phase-2 item. |

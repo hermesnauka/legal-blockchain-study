@@ -1,0 +1,7 @@
+django>=6.0
+daphne
+channels
+dilithium-py
+kyber-py
+cryptography
+websockets
