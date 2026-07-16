@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- XML doc comments are a hard requirement of this project (the "why this is
+         compliant and secure" narrative), but we don't fail the build on the few
+         API surface members that don't need them. -->
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Backend-owned PL/EN dictionaries served by GET /api/i18n/{lang}.
+         (The Web SDK already lists .json files as Content, so Update, not Include.) -->
+    <Content Update="i18n\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
