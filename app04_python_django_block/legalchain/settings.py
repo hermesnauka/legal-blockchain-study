@@ -43,6 +43,7 @@ USE_TZ = True
 # Override per node via environment: LEGALCHAIN_NODE_NAME=node-B ... runserver 8111
 LEGALCHAIN = {
     "NODE_NAME": os.environ.get("LEGALCHAIN_NODE_NAME", "node-A"),
+    "PORT": int(os.environ.get("LEGALCHAIN_PORT", "8110")),
     "CONSENSUS_DEFAULT": os.environ.get("LEGALCHAIN_CONSENSUS", "POS"),
     "TOKENOMICS": {
         # Educational tokenomics: fixed block reward, halved every HALVING_INTERVAL

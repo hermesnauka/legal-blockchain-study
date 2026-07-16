@@ -45,11 +45,15 @@ python3 -m venv .venv
 
 ```bash
 # node-A (port 8110)
-LEGALCHAIN_NODE_NAME=node-A .venv/bin/python manage.py runserver 8110
+LEGALCHAIN_NODE_NAME=node-A LEGALCHAIN_PORT=8110 .venv/bin/python manage.py runserver 8110
 
 # node-B (port 8111) — in another terminal
-LEGALCHAIN_NODE_NAME=node-B .venv/bin/python manage.py runserver 8111
+LEGALCHAIN_NODE_NAME=node-B LEGALCHAIN_PORT=8111 .venv/bin/python manage.py runserver 8111
 ```
+
+`LEGALCHAIN_PORT` only feeds the informational `port` field returned by `GET /api/node` —
+set it to match whatever port you pass to `runserver`/`daphne`, since Django itself
+doesn't read its own bind port back out of that value.
 
 | Component | Port |
 |---|---|
