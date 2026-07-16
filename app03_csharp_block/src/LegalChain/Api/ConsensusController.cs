@@ -37,5 +37,5 @@ public class ConsensusController : ControllerBase
         return new { active = _engine.Active.Name };
     }
 
-    public record SwitchRequest([property: Required(AllowEmptyStrings = false)] string Strategy);
+    public record SwitchRequest([Required(AllowEmptyStrings = false)] string Strategy);
 }

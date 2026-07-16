@@ -52,15 +52,15 @@ public class ContractController : ControllerBase
         => _agri.TrailOf(batchId);
 
     public record MedicalConsentRequest(
-        [property: Required(AllowEmptyStrings = false)] string PatientId,
-        [property: Required(AllowEmptyStrings = false)] string GranteeId,
-        [property: Required(AllowEmptyStrings = false)] string Scope,
-        [property: Required] bool Granted);
+        [Required(AllowEmptyStrings = false)] string PatientId,
+        [Required(AllowEmptyStrings = false)] string GranteeId,
+        [Required(AllowEmptyStrings = false)] string Scope,
+        [Required] bool Granted);
 
     public record AgriEventRequest(
-        [property: Required(AllowEmptyStrings = false)] string BatchId,
-        [property: Required(AllowEmptyStrings = false)] string Stage,
-        [property: Required(AllowEmptyStrings = false)] string Actor,
-        [property: Required(AllowEmptyStrings = false)] string Location,
+        [Required(AllowEmptyStrings = false)] string BatchId,
+        [Required(AllowEmptyStrings = false)] string Stage,
+        [Required(AllowEmptyStrings = false)] string Actor,
+        [Required(AllowEmptyStrings = false)] string Location,
         string? Details);
 }

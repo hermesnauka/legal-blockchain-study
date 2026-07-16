@@ -62,5 +62,5 @@ public class NodeController : ControllerBase
         };
     }
 
-    public record ConnectRequest([property: Required(AllowEmptyStrings = false)] string Url);
+    public record ConnectRequest([Required(AllowEmptyStrings = false)] string Url);
 }

@@ -257,3 +257,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+######### C# / .NET
+
+bin/
+obj/
+*.user
+.vs/

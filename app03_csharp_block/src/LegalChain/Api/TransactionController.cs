@@ -45,7 +45,7 @@ public class TransactionController : ControllerBase
     }
 
     public record TransferRequest(
-        [property: Required(AllowEmptyStrings = false)] string Recipient,
-        [property: Range(0, double.MaxValue)] decimal Amount,
+        [Required(AllowEmptyStrings = false)] string Recipient,
+        [Range(0, double.MaxValue)] decimal Amount,
         string? Memo);
 }

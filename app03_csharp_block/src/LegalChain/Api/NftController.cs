@@ -28,7 +28,7 @@ public class NftController : ControllerBase
     public IReadOnlyList<NftToken> All() => _nftService.All();
 
     public record MintRequest(
-        [property: Required(AllowEmptyStrings = false)] string Title,
-        [property: Required(AllowEmptyStrings = false)] string Description,
+        [Required(AllowEmptyStrings = false)] string Title,
+        [Required(AllowEmptyStrings = false)] string Description,
         string? MetadataUri);
 }

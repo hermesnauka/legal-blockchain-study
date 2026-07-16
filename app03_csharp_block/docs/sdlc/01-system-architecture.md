@@ -5,6 +5,10 @@
 **Status:** Approved for implementation
 **Mandatory cross-cutting requirement:** the UI ships with a PL/EN language switcher (🇬🇧/🇵🇱 flag toggle) — see [04-frontend-requirements.md](04-frontend-requirements.md).
 
+### Implementation notes (C#/.NET)
+
+This `app03_csharp_block` variant implements the same architecture on **.NET 10 (LTS) / ASP.NET Core** with C# records, async/await + `Task` concurrency (the .NET analogue of Java virtual threads), the `BouncyCastle.Cryptography` 2.6.2 NuGet package for PQC, and raw ASP.NET Core WebSockets middleware. Ports: node-A **8100**, node-B **8101**, Vite frontend dev server **5175**. Where diagrams or text below mention Spring Boot / Java 21 / `--server.port=8080/8081`, read ASP.NET Core / C# on .NET 10 / `--port 8100/8101`.
+
 ---
 
 ## 1. System Context
@@ -64,9 +68,9 @@ C4Container
 
 | Decision | Choice | Rationale |
 |---|---|---|
-| Language/runtime | **Java 21 (records, virtual threads)** | Immutable domain via records = tamper-evidence by construction; Loom virtual threads give cheap per-connection concurrency for P2P and WS fan-out. |
-| Framework | **Spring Boot 3.5** | Production-grade DI, WebSocket support, `spring.threads.virtual.enabled=true`. |
-| PQC | **BouncyCastle (ML-DSA, ML-KEM)** | Reference JCA implementations of NIST FIPS 204 / FIPS 203; portable across JDKs (unlike JDK-24-only built-ins). |
+| Language/runtime | **C# on .NET 10 (records, async/await + Task)** | Immutable domain via records = tamper-evidence by construction; async/await on the .NET thread pool gives cheap per-connection concurrency for P2P and WS fan-out. |
+| Framework | **ASP.NET Core (.NET 10)** | Production-grade built-in DI container, MVC controllers, raw WebSockets middleware (`UseWebSockets()`). |
+| PQC | **BouncyCastle.Cryptography 2.6.2 (ML-DSA, ML-KEM)** | Reference .NET implementations of NIST FIPS 204 / FIPS 203; portable NuGet package, no OS-specific crypto dependencies. |
 | Frontend | **React 18 + Vite + TypeScript** | See justification in doc 04. |
 | Transport | **WebSockets** (REST for commands) | Full-duplex ledger events; gRPC deferred (doc 05). |
 | Persistence | **In-memory chain (MVP)** | Educational focus; the chain itself is the audit log. File/DB snapshotting is a Phase-2 item. |
